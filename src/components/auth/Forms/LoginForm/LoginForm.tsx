@@ -1,26 +1,13 @@
 "use client";
 
-import { loginSchema } from "@/components/auth/Forms/_zod/LoginShema";
 import { CustomPasswordInput } from "@/components/custom-components/custom-password-input";
 import { CustomTextInput } from "@/components/custom-components/custom-test-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useLoginForm } from "./useLoginForm";
 
 const LoginForm = () => {
-  const form = useForm<z.infer<typeof loginSchema>>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    resolver: zodResolver(loginSchema),
-  });
-
-  async function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log("Login data:", values);
-  }
+  const { form, onSubmit } = useLoginForm();
 
   return (
     <Form {...form}>
@@ -35,7 +22,9 @@ const LoginForm = () => {
             label="Email"
             placeholder="Digite seu email"
           />
+
           <CustomPasswordInput control={form.control} name="password" />
+
           <Button className="w-full cursor-pointer" type="submit">
             Entrar
           </Button>
