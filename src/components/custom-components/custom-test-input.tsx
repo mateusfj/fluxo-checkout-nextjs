@@ -14,6 +14,7 @@ interface TextInputProps {
   label?: string;
   placeholder?: string;
   type?: string;
+  disabled?: boolean;
 }
 
 export function CustomTextInput({
@@ -22,6 +23,7 @@ export function CustomTextInput({
   label,
   placeholder,
   type = "text",
+  disabled,
 }: TextInputProps) {
   return (
     <FormField
@@ -31,7 +33,12 @@ export function CustomTextInput({
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input {...field} type={type} placeholder={placeholder} />
+            <Input
+              {...field}
+              type={type}
+              placeholder={placeholder}
+              disabled={disabled}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

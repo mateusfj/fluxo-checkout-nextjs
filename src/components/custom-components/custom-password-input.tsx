@@ -15,6 +15,7 @@ interface PasswordInputProps {
   name: string;
   label?: string;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export function CustomPasswordInput({
@@ -22,6 +23,7 @@ export function CustomPasswordInput({
   name,
   label = "Senha",
   placeholder = "Digite sua senha",
+  disabled,
 }: PasswordInputProps) {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -37,6 +39,7 @@ export function CustomPasswordInput({
               <Input
                 {...field}
                 placeholder={placeholder}
+                disabled={disabled}
                 type={showPassword ? "text" : "password"}
                 className="pr-10"
               />
