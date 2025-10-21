@@ -26,7 +26,7 @@ const RegisterPage = () => {
           <CardFooter className="text-center pb-6">
             <p className="text-center text-sm text-muted-foreground">
               Já tem uma conta?{" "}
-              <Link className="text-primary hover:underline" href="/">
+              <Link className="text-primary hover:underline" href="/login">
                 Entrar
               </Link>
             </p>

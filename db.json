@@ -5,6 +5,12 @@
       "nome": "Mateus Sousa",
       "email": "admin@fgenia.com",
       "password": "1234567890A@"
+    },
+    {
+      "id": "0c8c",
+      "nome": "Mateus Sousa",
+      "email": "mateus@gmail.com",
+      "password": "12345678"
     }
   ]
 }
