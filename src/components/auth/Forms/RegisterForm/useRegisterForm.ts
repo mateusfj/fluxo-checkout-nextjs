@@ -1,0 +1,29 @@
+import { useCreateUser } from "@/hooks/auth/useCreateUser";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { registerSchema } from "../_zod/RegisterSchema";
+
+export const useRegisterForm = () => {
+  const { mutateAsync: createUser } = useCreateUser();
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    defaultValues: {
+      confirmPassword: "",
+      email: "",
+      nome: "",
+      password: "",
+    },
+    resolver: zodResolver(registerSchema),
+  });
+
+  async function onSubmit(values: z.infer<typeof registerSchema>) {
+    await createUser({
+      nome: values.nome,
+      email: values.email,
+      password: values.password,
+    });
+  }
+
+  return { form, onSubmit };
+};

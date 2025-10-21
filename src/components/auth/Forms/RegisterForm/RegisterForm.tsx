@@ -1,30 +1,13 @@
 "use client";
-
-import { registerSchema } from "@/components/auth/Forms/_zod/RegisterSchema";
 import { CustomPasswordInput } from "@/components/custom-components/custom-password-input";
 import { CustomTextInput } from "@/components/custom-components/custom-test-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { Spinner } from "@/components/ui/spinner";
+import { useRegisterForm } from "./useRegisterForm";
 
 const RegisterForm = () => {
-  const router = useRouter();
-  const form = useForm<z.infer<typeof registerSchema>>({
-    defaultValues: {
-      confirmPassword: "",
-      email: "",
-      nome: "",
-      password: "",
-    },
-    resolver: zodResolver(registerSchema),
-  });
-
-  async function onSubmit(values: z.infer<typeof registerSchema>) {
-    console.log("Register data:", values);
-  }
+  const { form, onSubmit } = useRegisterForm();
 
   return (
     <Form {...form}>
@@ -41,9 +24,14 @@ const RegisterForm = () => {
           name="email"
           label="Email"
           placeholder="Digite seu email"
+          disabled={form.formState.isSubmitting}
         />
 
-        <CustomPasswordInput control={form.control} name="password" />
+        <CustomPasswordInput
+          control={form.control}
+          name="password"
+          disabled={form.formState.isSubmitting}
+        />
 
         <CustomPasswordInput
           control={form.control}
@@ -56,8 +44,15 @@ const RegisterForm = () => {
           className="cursor-pointer w-full"
           onClick={form.handleSubmit(onSubmit)}
           type="button"
+          disabled={form.formState.isSubmitting}
         >
-          Registrar
+          {form.formState.isSubmitting ? (
+            <>
+              <Spinner /> Cadastrando...
+            </>
+          ) : (
+            "Registrar"
+          )}
         </Button>
       </div>
     </Form>
