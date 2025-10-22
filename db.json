@@ -1,16 +1,78 @@
 {
   "users": [
     {
-      "id": "0e83",
-      "nome": "Mateus Sousa",
-      "email": "admin@fgenia.com",
-      "password": "1234567890A@"
-    },
-    {
       "id": "0c8c",
       "nome": "Mateus Sousa",
       "email": "mateus@gmail.com",
       "password": "12345678"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "Smartphone XYZ",
+      "description": "A high-end smartphone with a sleek design and powerful features.",
+      "price": 799.99,
+      "imageUrl": "https://example.com/images/smartphone_xyz.jpg",
+      "quantity": 50
+    },
+    {
+      "id": "p2",
+      "name": "Wireless Headphones ABC",
+      "description": "Noise-cancelling wireless headphones with superior sound quality.",
+      "price": 199.99,
+      "imageUrl": "https://example.com/images/headphones_abc.jpg",
+      "quantity": 100
+    },
+    {
+      "id": "p3",
+      "name": "4K Ultra HD TV",
+      "description": "A 55-inch 4K Ultra HD television with vibrant colors and smart features.",
+      "price": 999.99,
+      "imageUrl": "https://example.com/images/4k_tv.jpg",
+      "quantity": 30
+    },
+    {
+      "id": "p4",
+      "name": "Gaming Laptop Pro",
+      "description": "A powerful gaming laptop with high-performance graphics and fast processing.",
+      "price": 1499.99,
+      "imageUrl": "https://example.com/images/gaming_laptop_pro.jpg",
+      "quantity": 20
+    },
+    {
+      "id": "p5",
+      "name": "Smartwatch Series 5",
+      "description": "A stylish smartwatch with fitness tracking and customizable watch faces.",
+      "price": 299.99,
+      "imageUrl": "https://example.com/images/smartwatch_series_5.jpg",
+      "quantity": 75
+    }
+  ],
+  "cart": [
+    {
+      "id": "a80e",
+      "userId": "0c8c"
+    }
+  ],
+  "itemsCart": [
+    {
+      "id": "99b1",
+      "cartId": "a80e",
+      "productId": "p1",
+      "quantity": 9
+    },
+    {
+      "id": "6f83",
+      "cartId": "a80e",
+      "productId": "p2",
+      "quantity": 3
+    },
+    {
+      "id": "ce7d",
+      "cartId": "a80e",
+      "productId": "p3",
+      "quantity": 4
     }
   ]
 }
