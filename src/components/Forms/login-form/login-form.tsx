@@ -4,7 +4,7 @@ import { CustomPasswordInput } from "@/components/custom-components/custom-passw
 import { CustomTextInput } from "@/components/custom-components/custom-text-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useLoginForm } from "./useLoginForm";
+import { useLoginForm } from "./use-login-form";
 
 const LoginForm = () => {
   const { form, onSubmit } = useLoginForm();

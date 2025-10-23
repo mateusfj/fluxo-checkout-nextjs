@@ -9,3 +9,5 @@ export const shippingSchema = z.object({
   state: z.string().min(2, "Campo obrigatório"),
   zipCode: z.string().min(5, "Campo obrigatório"),
 });
+
+export type ShippingForm = z.infer<typeof shippingSchema>;

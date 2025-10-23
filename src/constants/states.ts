@@ -1,4 +1,4 @@
-export const STATES = [
+export const STATES: { name: string; value: string }[] = [
   {
     name: "Acre",
     value: "AC",

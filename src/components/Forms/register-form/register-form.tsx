@@ -4,7 +4,7 @@ import { CustomTextInput } from "@/components/custom-components/custom-text-inpu
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
-import { useRegisterForm } from "./useRegisterForm";
+import { useRegisterForm } from "./use-register-form";
 
 const RegisterForm = () => {
   const { form, onSubmit } = useRegisterForm();
