@@ -79,9 +79,21 @@
       "quantity": 1
     },
     {
-      "id": "1aff",
+      "id": "613a",
       "cartId": "6a9a",
       "productId": "p1",
+      "quantity": 1
+    },
+    {
+      "id": "a79c",
+      "cartId": "6a9a",
+      "productId": "p2",
+      "quantity": 1
+    },
+    {
+      "id": "0a3c",
+      "cartId": "6a9a",
+      "productId": "p3",
       "quantity": 1
     }
   ]

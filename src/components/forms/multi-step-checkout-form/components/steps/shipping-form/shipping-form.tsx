@@ -2,8 +2,8 @@
 
 import { CustomSelect } from "@/components/custom-components/custom-select";
 import { CustomTextInput } from "@/components/custom-components/custom-text-input";
-import { MultiStepForm } from "@/components/Forms/_zod/multi-step-checkout-schema";
-import { STATES } from "@/constants/states";
+import { MultiStepForm } from "@/components/forms/_zod/multi-step-checkout-schema";
+import { STATES } from "@/constants/@shared/states";
 import { phoneMask } from "@/utils/functions/masks/phoneMask";
 import { useFormContext } from "react-hook-form";
 

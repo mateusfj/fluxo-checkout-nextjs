@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/components/Forms/register-form/register-form";
+import { RegisterForm } from "@/components/forms/register-form/register-form";
 import {
   Card,
   CardContent,

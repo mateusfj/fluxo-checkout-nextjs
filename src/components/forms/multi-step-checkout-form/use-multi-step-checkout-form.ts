@@ -2,7 +2,7 @@ import { STEPS } from "@/constants/steps-checkout-form";
 import { AuthContext } from "@/utils/providers/AuthProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import {
   MultiStepForm,
   multiStepCheckoutSchema,
@@ -12,7 +12,7 @@ export const useMultiStepCheckoutForm = () => {
   const { user } = useContext(AuthContext);
   const [step, setStep] = useState<number>(0);
   const form = useForm<MultiStepForm>({
-    resolver: zodResolver(multiStepCheckoutSchema),
+    resolver: zodResolver(multiStepCheckoutSchema) as Resolver<MultiStepForm>,
     defaultValues: {
       shippingSchema: {
         name: user?.name ?? "",
@@ -22,6 +22,18 @@ export const useMultiStepCheckoutForm = () => {
         city: "",
         state: "",
         zipCode: "",
+      },
+      methodPaymentSchema: {
+        paymentMethod: undefined,
+        cardName: "",
+        cardNumber: "",
+        expiryMonth: "",
+        expiryYear: "",
+        cardCVC: "",
+        parcels: undefined,
+      },
+      orderReviewSchema: {
+        agreeToTerms: false,
       },
     },
   });
@@ -33,10 +45,13 @@ export const useMultiStepCheckoutForm = () => {
 
   const nextStep = async () => {
     const isValid = await form.trigger(STEPS[step].field);
-    console.log("isValid:", isValid);
     if (!isValid) return;
+
+    if (step === STEPS.length - 1) {
+      form.handleSubmit(onSubmit)();
+      return;
+    }
     incrementStep();
-    // form.handleSubmit(onSubmit)();
   };
 
   const onSubmit = (data: MultiStepForm) => {

@@ -1,4 +1,5 @@
 "use client";
+import { StepProgress } from "@/components/@shared/StepProgress";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,6 +18,7 @@ const MultiStepCheckoutForm = () => {
 
   return (
     <FormProvider {...form}>
+      <StepProgress currentStep={step} />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -27,7 +29,7 @@ const MultiStepCheckoutForm = () => {
           <CardHeader>
             <h2 className="text-xl font-semibold flex items-center gap-2">
               <MapPin className="h-5 w-5" />
-              {STEPS[step].name}
+              {STEPS[step].label}
             </h2>
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
