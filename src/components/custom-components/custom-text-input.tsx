@@ -15,6 +15,7 @@ interface TextInputProps {
   placeholder?: string;
   type?: string;
   disabled?: boolean;
+  mask?: (value: string) => string;
 }
 
 export function CustomTextInput({
@@ -24,6 +25,7 @@ export function CustomTextInput({
   placeholder,
   type = "text",
   disabled,
+  mask,
 }: TextInputProps) {
   return (
     <FormField
@@ -38,6 +40,12 @@ export function CustomTextInput({
               type={type}
               placeholder={placeholder}
               disabled={disabled}
+              onChange={(e) => {
+                const value = e.target.value;
+                const maskedValue = mask ? mask(value) : value;
+                field.onChange(maskedValue);
+              }}
+              value={field.value ?? ""}
             />
           </FormControl>
           <FormMessage />

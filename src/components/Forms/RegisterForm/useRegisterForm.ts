@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { registerSchema } from "../_zod/RegisterSchema";
+import { registerSchema } from "../_zod/register-schema";
 
 export const useRegisterForm = () => {
   const { push } = useRouter();
@@ -13,7 +13,7 @@ export const useRegisterForm = () => {
     defaultValues: {
       confirmPassword: "",
       email: "",
-      nome: "",
+      name: "",
       password: "",
     },
     resolver: zodResolver(registerSchema),
@@ -21,7 +21,7 @@ export const useRegisterForm = () => {
 
   async function onSubmit(values: z.infer<typeof registerSchema>) {
     await createUser({
-      nome: values.nome,
+      name: values.name,
       email: values.email,
       password: values.password,
     });

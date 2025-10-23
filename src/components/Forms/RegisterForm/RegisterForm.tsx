@@ -1,6 +1,6 @@
 "use client";
 import { CustomPasswordInput } from "@/components/custom-components/custom-password-input";
-import { CustomTextInput } from "@/components/custom-components/custom-test-input";
+import { CustomTextInput } from "@/components/custom-components/custom-text-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
@@ -14,7 +14,7 @@ const RegisterForm = () => {
       <div className="flex flex-col gap-4">
         <CustomTextInput
           control={form.control}
-          name="nome"
+          name="name"
           label="Nome"
           placeholder="Digite seu nome completo"
         />

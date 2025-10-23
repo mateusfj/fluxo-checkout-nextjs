@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 interface CreateUserProps {
-  nome: string;
+  name: string;
   email: string;
   password: string;
 }

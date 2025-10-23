@@ -7,7 +7,7 @@ const PUBLIC_ROUTES = [
     whenAuthenticated: "redirect",
   },
   {
-    path: "/registrar",
+    path: "/register",
     whenAuthenticated: "redirect",
   },
 ] as const;

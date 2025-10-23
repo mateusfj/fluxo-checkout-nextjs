@@ -7,7 +7,7 @@ export const registerSchema = z
       .string()
       .min(8, "A senha deve ter pelo menos 8 caracteres"),
     email: z.email("E-mail inválido"),
-    nome: z.string().min(1, "Nome é obrigatório"),
+    name: z.string().min(1, "Nome é obrigatório"),
     password: z.string().min(8, "A senha deve ter pelo menos 8 caracteres"),
   })
   .refine((data) => data.password === data.confirmPassword, {

@@ -15,10 +15,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<Partial<any> | null>(null);
 
   useEffect(() => {
-    console.log(user);
-  }, []);
-
-  useEffect(() => {
     const checkAuthCookie = async () => {
       const sessionUser = await getSession();
       if (sessionUser) {

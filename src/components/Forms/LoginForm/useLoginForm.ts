@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { loginSchema } from "../_zod/LoginShema";
+import { loginSchema } from "../_zod/login-shema";
 
 export const useLoginForm = () => {
   const { push } = useRouter();

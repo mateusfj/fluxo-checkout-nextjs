@@ -1,7 +1,7 @@
 "use client";
 
 import { CustomPasswordInput } from "@/components/custom-components/custom-password-input";
-import { CustomTextInput } from "@/components/custom-components/custom-test-input";
+import { CustomTextInput } from "@/components/custom-components/custom-text-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useLoginForm } from "./useLoginForm";

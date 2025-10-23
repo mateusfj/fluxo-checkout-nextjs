@@ -2,8 +2,14 @@
   "users": [
     {
       "id": "0c8c",
-      "nome": "Mateus Sousa",
+      "name": "Mateus Sousa",
       "email": "mateus@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": "c5ef",
+      "name": "Thais Dos Santos",
+      "email": "thais@gmail.com",
       "password": "12345678"
     }
   ],
@@ -53,26 +59,30 @@
     {
       "id": "a80e",
       "userId": "0c8c"
+    },
+    {
+      "id": "6a9a",
+      "userId": "c5ef"
     }
   ],
   "itemsCart": [
     {
-      "id": "99b1",
-      "cartId": "a80e",
-      "productId": "p1",
-      "quantity": 9
-    },
-    {
-      "id": "6f83",
+      "id": "def2",
       "cartId": "a80e",
       "productId": "p2",
       "quantity": 3
     },
     {
-      "id": "ce7d",
+      "id": "f664",
       "cartId": "a80e",
-      "productId": "p3",
-      "quantity": 4
+      "productId": "p1",
+      "quantity": 1
+    },
+    {
+      "id": "1aff",
+      "cartId": "6a9a",
+      "productId": "p1",
+      "quantity": 1
     }
   ]
 }
