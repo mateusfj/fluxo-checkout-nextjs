@@ -30,9 +30,9 @@ export const CartCard = ({ item }: CartCardProps) => {
       className="flex items-center gap-4 p-4 border rounded-lg"
     >
       <div className="flex-1">
-        <h3 className="font-medium line-clamp-1">{item.product.name}</h3>
+        <h3 className="font-medium line-clamp-1">{item.name}</h3>
         <p className="text-sm text-gray-500">
-          R$ {item.product.price.toFixed(2)} reais
+          R$ {item.price.toFixed(2)} reais
         </p>
       </div>
       <div className="flex items-center gap-2">
@@ -58,7 +58,7 @@ export const CartCard = ({ item }: CartCardProps) => {
       </div>
       <div className="text-right">
         <p className="font-medium">
-          R$ {(item.product.price * item.quantity).toFixed(2)}
+          R$ {(item.price * item.quantity).toFixed(2)}
         </p>
         <Button
           variant="outline"

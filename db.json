@@ -20,7 +20,7 @@
       "description": "Fones de ouvido sem fio com cancelamento ativo de ruído e bateria de até 30 horas.",
       "price": 349.9,
       "imageUrl": "images/products/phone-1.webp",
-      "quantity": 100
+      "estoque": 100
     },
     {
       "id": "p2",
@@ -28,7 +28,7 @@
       "description": "Fones Bluetooth com graves potentes, microfone embutido e design ergonômico.",
       "price": 279.9,
       "imageUrl": "images/products/phone-2.webp",
-      "quantity": 80
+      "estoque": 80
     },
     {
       "id": "p3",
@@ -36,7 +36,7 @@
       "description": "Fones over-ear confortáveis, ideais para longas sessões de uso, com som de alta fidelidade.",
       "price": 499.9,
       "imageUrl": "images/products/phone-3.webp",
-      "quantity": 60
+      "estoque": 60
     },
     {
       "id": "p4",
@@ -44,43 +44,33 @@
       "description": "Fones de ouvido compactos, resistentes à água e com estojo de carregamento rápido.",
       "price": 199.9,
       "imageUrl": "images/products/phone-4.webp",
-      "quantity": 120
+      "estoque": 120
     }
   ],
   "cart": [
     {
-      "id": "a80e",
-      "userId": "0c8c"
-    },
-    {
-      "id": "6a9a",
+      "id": "6faf",
       "userId": "c5ef"
     }
   ],
   "itemsCart": [
     {
-      "id": "def2",
-      "cartId": "a80e",
-      "productId": "p2",
-      "quantity": 3
-    },
-    {
-      "id": "f664",
-      "cartId": "a80e",
-      "productId": "p1",
-      "quantity": 1
-    },
-    {
-      "id": "169e",
-      "cartId": "6a9a",
-      "productId": "p1",
-      "quantity": 1
-    },
-    {
-      "id": "0749",
-      "cartId": "6a9a",
+      "id": "b14f",
+      "cartId": "6faf",
       "productId": "p3",
-      "quantity": 3
+      "quantity": 2
+    },
+    {
+      "id": "0b55",
+      "cartId": "6faf",
+      "productId": "p1",
+      "quantity": 1
+    },
+    {
+      "id": "f750",
+      "cartId": "6faf",
+      "productId": "p2",
+      "quantity": 1
     }
   ]
 }

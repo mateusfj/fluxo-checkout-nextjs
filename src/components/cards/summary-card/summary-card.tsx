@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllItemsCartByUser } from "@/hooks/cart/useGet/useGetAllCartByUser";
+import { useCartStore } from "@/stores/use-cart-store";
 import { LucideCreditCard, ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Badge } from "../../ui/badge";
@@ -13,8 +13,7 @@ interface SummaryCardProps {
 
 export const SummaryCard = ({ enabledButton }: SummaryCardProps) => {
   const { push } = useRouter();
-  const { data: cartItemsResult } = useGetAllItemsCartByUser();
-
+  const { items: cartItems, getTotalPrice } = useCartStore();
   const handleRedirectToCheckout = () => {
     push("/checkout");
   };
@@ -29,12 +28,12 @@ export const SummaryCard = ({ enabledButton }: SummaryCardProps) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col gap-4">
-          {cartItemsResult?.data.map((item) => (
+          {cartItems.map((item) => (
             <div key={item.id} className="flex gap-3">
               <div className="relative w-12 h-12 flex-shrink-0">
                 <img
-                  src={item.product.imageUrl}
-                  alt={item.product.name}
+                  src={item.imageUrl}
+                  alt={item.name}
                   className="w-full h-full object-cover rounded-md"
                 />
                 <Badge className="absolute -top-1 -right-1 text-xs min-w-5 h-5 flex items-center justify-center">
@@ -42,22 +41,18 @@ export const SummaryCard = ({ enabledButton }: SummaryCardProps) => {
                 </Badge>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">
-                  {item.product.name}
-                </p>
+                <p className="text-sm font-medium truncate">{item.name}</p>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold">
-                    ${item.product.price}
-                  </span>
-                  {item.product.price && (
+                  <span className="text-sm font-semibold">${item.price}</span>
+                  {item.price && (
                     <span className="text-xs text-muted-foreground line-through">
-                      ${item.product.price}
+                      ${item.price}
                     </span>
                   )}
                 </div>
               </div>
               <div className="text-sm font-semibold">
-                ${(item.product.price * item.quantity).toFixed(2)}
+                ${(item.price * item.quantity).toFixed(2)}
               </div>
             </div>
           ))}
@@ -66,7 +61,7 @@ export const SummaryCard = ({ enabledButton }: SummaryCardProps) => {
         <div className="flex flex-col gap-2 border-t pt-4">
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>${100}</span>
+            <span>${getTotalPrice().toFixed(2)}</span>
           </div>
         </div>
         {enabledButton && (

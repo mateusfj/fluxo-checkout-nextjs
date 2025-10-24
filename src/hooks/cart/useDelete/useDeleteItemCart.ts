@@ -1,10 +1,12 @@
 import { IResponseError } from "@/@types/services/IResponse";
+import { useCartStore } from "@/stores/use-cart-store";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const useDeleteItemCart = (invalidateQuery: string[]) => {
   const queryClient = useQueryClient();
+  const { removeItem } = useCartStore();
   return useMutation({
     mutationFn: async (id: string) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -28,6 +30,10 @@ const useDeleteItemCart = (invalidateQuery: string[]) => {
       }
 
       return;
+    },
+    onMutate: (id) => {
+      console.log("Removendo item do carrinho:", id);
+      removeItem(id);
     },
     onError: async (error: IResponseError) => {
       toast.error(error.message || "Erro inesperado");

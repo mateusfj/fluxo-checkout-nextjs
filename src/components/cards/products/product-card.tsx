@@ -8,14 +8,23 @@ interface productCardProps {
   description: string;
   price: number;
   imageUrl: string;
-  quantity: number;
 }
 
 export const ProductCard = (product: productCardProps) => {
   const { mutateAsync: createItemCart } = useCreateItemCart(["items-cart"]);
 
   const handleAddToCart = async () => {
-    await createItemCart({ productId: product.id, price: product.price });
+    const data = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      description: product.description,
+    };
+
+    await createItemCart({
+      product: data,
+    });
   };
 
   return (

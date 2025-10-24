@@ -1,16 +1,26 @@
+import { useCartStore } from "@/stores/use-cart-store";
+import { generateId } from "@/utils/functions/generateId";
 import { AuthContext } from "@/utils/providers/AuthProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { toast } from "sonner";
 
-interface CreateCartItemInput {
-  productId: string;
+interface ProductData {
+  id: string;
+  name: string;
   price: number;
+  imageUrl: string;
+  description: string;
+}
+
+interface CreateCartItemInput {
+  product: ProductData;
 }
 
 export const useCreateItemCart = (invalidateQuery: string[]) => {
   const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
+  const { addItem, removeItem, updateItemId } = useCartStore();
 
   return useMutation({
     mutationFn: async (input: CreateCartItemInput) => {
@@ -40,7 +50,7 @@ export const useCreateItemCart = (invalidateQuery: string[]) => {
       }
 
       const itemRes = await fetch(
-        `http://localhost:3001/itemsCart?cartId=${cart.id}&productId=${input.productId}`
+        `http://localhost:3001/itemsCart?cartId=${cart.id}&productId=${input.product.id}`
       );
 
       if (!itemRes.ok) throw new Error("Erro ao buscar item no carrinho");
@@ -68,7 +78,7 @@ export const useCreateItemCart = (invalidateQuery: string[]) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           cartId: cart.id,
-          productId: input.productId,
+          productId: input.product.id,
           quantity: 1,
         }),
       });
@@ -76,26 +86,40 @@ export const useCreateItemCart = (invalidateQuery: string[]) => {
       if (!createItemRes.ok)
         throw new Error("Erro ao adicionar item ao carrinho");
 
-      return;
+      const createdItem = await createItemRes.json();
+
+      return createdItem;
     },
 
-    onMutate() {
-      const toastId = toast.loading("Adicionando item ao carrinho...");
-      return { toastId };
+    onMutate(data) {
+      const tempId = generateId();
+      addItem({
+        id: tempId,
+        productId: data.product.id,
+        description: data.product.description,
+        name: data.product.name,
+        price: data.product.price,
+        imageUrl: data.product.imageUrl,
+        quantity: 1,
+      });
+      return { tempId };
     },
 
-    onError(error: any, _, context) {
+    onError(error: any, __, context: any) {
       toast.error(error?.message || "Erro inesperado");
-      toast.dismiss(context?.toastId);
+      if (context?.tempId) removeItem(context.tempId);
     },
 
-    onSuccess(_, __, context) {
-      toast.success("Item adicionado ao carrinho com sucesso!");
-      toast.dismiss(context?.toastId);
+    onSuccess(data, __, context) {
+      if (context?.tempId && data?.id) {
+        updateItemId(context.tempId, data.id);
+      }
+      toast.success("Item adicionado ao carrinho com sucesso!", {
+        id: "success-add",
+      });
     },
 
     onSettled(_, __, ___, context) {
-      toast.dismiss(context?.toastId);
       queryClient.invalidateQueries({ queryKey: invalidateQuery });
     },
   });

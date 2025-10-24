@@ -11,6 +11,11 @@ export type IItemCart = {
 };
 
 export type IItemCartDetailed = {
-  product: IProduct;
-  subtotal: number;
-} & IItemCart;
+  id: string;
+  productId: string;
+  quantity: number;
+  description: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+};

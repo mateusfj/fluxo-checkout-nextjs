@@ -1,4 +1,14 @@
+import { ErrorFallback } from "@/components/@shared/ErrorFallback/ErrorFallback";
+import { ProductListSkeleton } from "@/components/skeletons/product-skeleton/product-list-skeleton";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import { useGetAllProducts } from "@/hooks/products/useGet/useGetAllProducts";
+import { Folder } from "lucide-react";
 import { ProductCard } from "./product-card";
 
 export const ProductList = () => {
@@ -9,34 +19,45 @@ export const ProductList = () => {
   } = useGetAllProducts();
 
   if (isLoadingProducts) {
-    return <p>Loading products...</p>;
+    return <ProductListSkeleton />;
   }
 
   if (isErrorProducts) {
-    return <p>Error loading products.</p>;
+    return (
+      <div className="flex justify-center items-center">
+        <ErrorFallback invalidateQuery={["products"]} />
+      </div>
+    );
   }
 
   if (productsResult && productsResult.data.length === 0) {
-    return <p>No products available.</p>;
+    return (
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <Folder />
+          </EmptyMedia>
+          <EmptyTitle>Nenhum Produto Encontrado</EmptyTitle>
+          <EmptyDescription>
+            Parece que não há produtos disponíveis no momento.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    );
   }
 
   return (
-    <div>
-      {productsResult && productsResult.data.length > 0 && (
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {productsResult.data.map((product) => (
-            <ProductCard
-              key={product.id}
-              description={product.description}
-              imageUrl={product.imageUrl}
-              name={product.name}
-              price={product.price}
-              quantity={product.quantity}
-              id={product.id}
-            />
-          ))}
-        </div>
-      )}
+    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {productsResult?.data.map((product) => (
+        <ProductCard
+          key={product.id}
+          description={product.description}
+          imageUrl={product.imageUrl}
+          name={product.name}
+          price={product.price}
+          id={product.id}
+        />
+      ))}
     </div>
   );
 };
