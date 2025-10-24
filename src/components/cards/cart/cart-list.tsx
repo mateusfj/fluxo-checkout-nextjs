@@ -1,12 +1,14 @@
+"use client";
+
 import { useGetAllItemsCartByUser } from "@/hooks/cart/useGet/useGetAllCartByUser";
 import { ShoppingCart } from "lucide-react";
-import { Button } from "../ui/button";
-import { ItemCartCard } from "./cart-item-card-drawer";
+import { Button } from "../../ui/button";
+import { CartCard } from "./cart-card";
 
-export const CartDrawerBody = () => {
+export const CartList = () => {
   const { data: itemsCartResultByUser } = useGetAllItemsCartByUser();
   return (
-    <div className="flex-col overflow-y-auto px-4">
+    <div className="flex-col">
       {itemsCartResultByUser?.data.length === 0 ? (
         <div className="text-center py-8">
           <ShoppingCart className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -16,7 +18,7 @@ export const CartDrawerBody = () => {
       ) : (
         <div className="space-y-4">
           {itemsCartResultByUser?.data.map((item: any) => (
-            <ItemCartCard key={item.id} item={item} />
+            <CartCard key={item.id} item={item} />
           ))}
         </div>
       )}

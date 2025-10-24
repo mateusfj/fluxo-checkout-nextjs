@@ -16,43 +16,35 @@
   "products": [
     {
       "id": "p1",
-      "name": "Smartphone XYZ",
-      "description": "A high-end smartphone with a sleek design and powerful features.",
-      "price": 799.99,
-      "imageUrl": "https://example.com/images/smartphone_xyz.jpg",
-      "quantity": 50
-    },
-    {
-      "id": "p2",
-      "name": "Wireless Headphones ABC",
-      "description": "Noise-cancelling wireless headphones with superior sound quality.",
-      "price": 199.99,
-      "imageUrl": "https://example.com/images/headphones_abc.jpg",
+      "name": "Auriculares SonicWave X1",
+      "description": "Fones de ouvido sem fio com cancelamento ativo de ruído e bateria de até 30 horas.",
+      "price": 349.9,
+      "imageUrl": "images/products/phone-1.webp",
       "quantity": 100
     },
     {
+      "id": "p2",
+      "name": "Headset PulseBeat 500",
+      "description": "Fones Bluetooth com graves potentes, microfone embutido e design ergonômico.",
+      "price": 279.9,
+      "imageUrl": "images/products/phone-2.webp",
+      "quantity": 80
+    },
+    {
       "id": "p3",
-      "name": "4K Ultra HD TV",
-      "description": "A 55-inch 4K Ultra HD television with vibrant colors and smart features.",
-      "price": 999.99,
-      "imageUrl": "https://example.com/images/4k_tv.jpg",
-      "quantity": 30
+      "name": "Headphones CloudTune Pro",
+      "description": "Fones over-ear confortáveis, ideais para longas sessões de uso, com som de alta fidelidade.",
+      "price": 499.9,
+      "imageUrl": "images/products/phone-3.webp",
+      "quantity": 60
     },
     {
       "id": "p4",
-      "name": "Gaming Laptop Pro",
-      "description": "A powerful gaming laptop with high-performance graphics and fast processing.",
-      "price": 1499.99,
-      "imageUrl": "https://example.com/images/gaming_laptop_pro.jpg",
-      "quantity": 20
-    },
-    {
-      "id": "p5",
-      "name": "Smartwatch Series 5",
-      "description": "A stylish smartwatch with fitness tracking and customizable watch faces.",
-      "price": 299.99,
-      "imageUrl": "https://example.com/images/smartwatch_series_5.jpg",
-      "quantity": 75
+      "name": "Earbuds AeroSound Lite",
+      "description": "Fones de ouvido compactos, resistentes à água e com estojo de carregamento rápido.",
+      "price": 199.9,
+      "imageUrl": "images/products/phone-4.webp",
+      "quantity": 120
     }
   ],
   "cart": [
@@ -79,22 +71,16 @@
       "quantity": 1
     },
     {
-      "id": "613a",
+      "id": "169e",
       "cartId": "6a9a",
       "productId": "p1",
       "quantity": 1
     },
     {
-      "id": "a79c",
-      "cartId": "6a9a",
-      "productId": "p2",
-      "quantity": 1
-    },
-    {
-      "id": "0a3c",
+      "id": "0749",
       "cartId": "6a9a",
       "productId": "p3",
-      "quantity": 1
+      "quantity": 3
     }
   ]
 }

@@ -22,7 +22,6 @@ export const ProductList = () => {
 
   return (
     <div>
-      <h1>Product List</h1>
       {productsResult && productsResult.data.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {productsResult.data.map((product) => (

@@ -1,13 +1,10 @@
 "use client";
 
-import { CartDrawer } from "@/components/cart/cart-drawer";
-import { ProductList } from "@/components/products/productList";
+import { ProductList } from "@/components/cards/products/product-list";
 
 const Home = () => {
   return (
     <main>
-      <h1>Private Home Page</h1>
-      <CartDrawer />
       <ProductList />
     </main>
   );

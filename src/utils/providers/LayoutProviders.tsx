@@ -13,8 +13,10 @@ const LayoutProviders = ({ children }: React.PropsWithChildren<object>) => {
           disableTransitionOnChange
           enableSystem
         >
+          {/* <SidebarProvider> */}
           {children}
           <Toaster position="top-center" />
+          {/* </SidebarProvider> */}
         </ThemeProvider>
       </AuthProvider>
     </ReactqueryProvider>

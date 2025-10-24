@@ -1,10 +1,23 @@
-import { useGetAllItemsCartByUser } from "@/hooks/cart/useGet/useGetAllCartByUser";
-import { ShoppingBag } from "lucide-react";
-import { Badge } from "../ui/badge";
-import { Card, CardContent, CardHeader } from "../ui/card";
+"use client";
 
-export const CheckoutSummaryCard = () => {
+import { useGetAllItemsCartByUser } from "@/hooks/cart/useGet/useGetAllCartByUser";
+import { LucideCreditCard, ShoppingBag } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
+import { Card, CardContent, CardHeader } from "../../ui/card";
+
+interface SummaryCardProps {
+  enabledButton?: boolean;
+}
+
+export const SummaryCard = ({ enabledButton }: SummaryCardProps) => {
+  const { push } = useRouter();
   const { data: cartItemsResult } = useGetAllItemsCartByUser();
+
+  const handleRedirectToCheckout = () => {
+    push("/checkout");
+  };
 
   return (
     <Card className="flex flex-col gap-5">
@@ -56,6 +69,11 @@ export const CheckoutSummaryCard = () => {
             <span>${100}</span>
           </div>
         </div>
+        {enabledButton && (
+          <Button className="w-full" onClick={handleRedirectToCheckout}>
+            <LucideCreditCard /> Comprar agora
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

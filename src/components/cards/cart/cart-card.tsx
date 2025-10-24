@@ -2,13 +2,13 @@ import { IItemCartDetailed } from "@/@types/cart/ICart";
 import { useDeleteItemCart } from "@/hooks/cart/useDelete/useDeleteItemCart";
 import { useUpdateQuantityItemCart } from "@/hooks/cart/useUpdate/useUpdateQuantityItemCart";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
-interface ItemCartCardProps {
+interface CartCardProps {
   item: IItemCartDetailed;
 }
 
-export const ItemCartCard = ({ item }: ItemCartCardProps) => {
+export const CartCard = ({ item }: CartCardProps) => {
   const { mutateAsync: deleteItemCart } = useDeleteItemCart(["items-cart"]);
   const {
     mutateAsync: updateQuantityItemCart,

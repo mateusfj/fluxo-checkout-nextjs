@@ -4,12 +4,13 @@ import { Check } from "lucide-react";
 
 interface StepProgressProps {
   currentStep: number;
+  steps: typeof STEPS;
 }
 
-export function StepProgress({ currentStep }: StepProgressProps) {
+export function StepProgress({ currentStep, steps }: StepProgressProps) {
   return (
-    <div className="flex items-center justify-start gap-4 sm:gap-6 py-4">
-      {STEPS.map(({ label, icon: Icon }, index) => (
+    <div className="flex items-center justify-center md:justify-start gap-4 sm:gap-6 py-4">
+      {steps.map(({ label, icon: Icon }, index) => (
         <div key={index} className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             <div
@@ -37,7 +38,7 @@ export function StepProgress({ currentStep }: StepProgressProps) {
               {label}
             </span>
           </div>
-          {index < STEPS.length - 1 && (
+          {index < steps.length - 1 && (
             <div
               className={cn(
                 "w-8 h-0.5 transition-colors duration-200",
