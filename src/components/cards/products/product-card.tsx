@@ -1,4 +1,9 @@
-import { useCreateItemCart } from "@/hooks/cart/useCreate/useCreateItemCart";
+"use client";
+
+import { useCartStore } from "@/stores/use-cart-store";
+import { generateId } from "@/utils/functions/generateId";
+import { AuthContext } from "@/utils/providers/AuthProvider";
+import { memo, useContext } from "react";
 import { Button } from "../../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../../ui/card";
 
@@ -10,21 +15,22 @@ interface productCardProps {
   imageUrl: string;
 }
 
-export const ProductCard = (product: productCardProps) => {
-  const { mutateAsync: createItemCart } = useCreateItemCart(["items-cart"]);
+export const ProductCard = memo((product: productCardProps) => {
+  const { addItem } = useCartStore();
+  const { user } = useContext(AuthContext);
+  const userId = user?.id || undefined;
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     const data = {
-      id: product.id,
+      id: generateId(),
+      productId: product.id,
       name: product.name,
       price: product.price,
       imageUrl: product.imageUrl,
       description: product.description,
+      quantity: 1,
     };
-
-    await createItemCart({
-      product: data,
-    });
+    addItem(data);
   };
 
   return (
@@ -47,9 +53,11 @@ export const ProductCard = (product: productCardProps) => {
       </CardContent>
       <CardFooter className="flex justify-start p-0">
         <Button className="rounded-full" onClick={handleAddToCart}>
-          Adicionar ao carrinho
+          {"Adicionar ao carrinho"}
         </Button>
       </CardFooter>
     </Card>
   );
-};
+});
+
+ProductCard.displayName = "ProductCard";

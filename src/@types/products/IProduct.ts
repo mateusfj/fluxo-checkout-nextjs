@@ -4,5 +4,4 @@ export type IProduct = {
   description: string;
   price: number;
   imageUrl: string;
-  estoque: number;
 };

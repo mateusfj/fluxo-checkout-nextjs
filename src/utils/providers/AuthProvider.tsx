@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllItemsCartByUser } from "@/hooks/cart/useGet/useGetAllCartByUser";
+import { useCartStore } from "@/stores/use-cart-store";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { getSession } from "../functions/getToken";
@@ -14,7 +14,7 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<Partial<any> | null>(null);
-  useGetAllItemsCartByUser({ userId: user?.id! });
+  const { setUserId } = useCartStore();
   useEffect(() => {
     const checkAuthCookie = async () => {
       const sessionUser = await getSession();
@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser({
           ...JSON.parse(sessionUser),
         });
+        setUserId(JSON.parse(sessionUser).id);
       }
     };
     checkAuthCookie();

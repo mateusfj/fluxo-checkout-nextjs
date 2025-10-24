@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const CartButton = () => {
   const { push } = useRouter();
-  const { items } = useCartStore();
+  const { getTotalItems } = useCartStore();
 
   const handleNavigateToCart = () => {
     push("/cart");
@@ -18,7 +18,7 @@ const CartButton = () => {
     <Button variant="ghost" className="relative" onClick={handleNavigateToCart}>
       <ShoppingCart className="h-5 w-5" />
       <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center rounded-full text-[10px] text-white">
-        {items.length}
+        {getTotalItems()}
       </Badge>
       Carrinho
     </Button>

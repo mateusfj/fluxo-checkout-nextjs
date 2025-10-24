@@ -1,28 +1,30 @@
 import { IItemCartDetailed } from "@/@types/cart/ICart";
-import { useDeleteItemCart } from "@/hooks/cart/useDelete/useDeleteItemCart";
-import { useUpdateQuantityItemCart } from "@/hooks/cart/useUpdate/useUpdateQuantityItemCart";
+import { useCartStore } from "@/stores/use-cart-store";
 import { Minus, Plus, Trash2 } from "lucide-react";
+import { memo, useCallback } from "react";
 import { Button } from "../../ui/button";
 
 interface CartCardProps {
   item: IItemCartDetailed;
 }
 
-export const CartCard = ({ item }: CartCardProps) => {
-  const { mutateAsync: deleteItemCart } = useDeleteItemCart(["items-cart"]);
-  const {
-    mutateAsync: updateQuantityItemCart,
-    isPending: isPendingUpdateQuantityItemCart,
-  } = useUpdateQuantityItemCart(["items-cart"]);
+export const CartCard = memo(({ item }: CartCardProps) => {
+  const { updateItemQuantity, removeItem } = useCartStore();
 
-  const handleDeleteItem = async (id: string) => {
-    await deleteItemCart(id);
-  };
+  const handleDeleteItem = useCallback(
+    (id: string) => {
+      removeItem(id);
+    },
+    [removeItem]
+  );
 
-  const handleUpdateQuantity = async (itemId: string, quantity: number) => {
-    if (quantity < 1) return await deleteItemCart(itemId);
-    await updateQuantityItemCart({ itemId, quantity });
-  };
+  const handleUpdateQuantity = useCallback(
+    (itemId: string, quantity: number) => {
+      if (quantity < 1) return removeItem(itemId);
+      updateItemQuantity(itemId, quantity);
+    },
+    [removeItem, updateItemQuantity]
+  );
 
   return (
     <div
@@ -40,7 +42,6 @@ export const CartCard = ({ item }: CartCardProps) => {
           variant="outline"
           size="icon"
           className="h-8 w-8"
-          disabled={isPendingUpdateQuantityItemCart}
           onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
         >
           <Minus className="w-3 h-3" />
@@ -50,7 +51,6 @@ export const CartCard = ({ item }: CartCardProps) => {
           variant="outline"
           size="icon"
           className="h-8 w-8"
-          disabled={isPendingUpdateQuantityItemCart}
           onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
         >
           <Plus className="w-3 h-3" />
@@ -63,7 +63,6 @@ export const CartCard = ({ item }: CartCardProps) => {
         <Button
           variant="outline"
           size="sm"
-          disabled={isPendingUpdateQuantityItemCart}
           className="text-red-600 hover:bg-red-50 mt-1"
           onClick={() => handleDeleteItem(item.id)}
         >
@@ -72,4 +71,6 @@ export const CartCard = ({ item }: CartCardProps) => {
       </div>
     </div>
   );
-};
+});
+
+CartCard.displayName = "CartCard";

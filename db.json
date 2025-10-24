@@ -46,31 +46,5 @@
       "imageUrl": "images/products/phone-4.webp",
       "estoque": 120
     }
-  ],
-  "cart": [
-    {
-      "id": "6faf",
-      "userId": "c5ef"
-    }
-  ],
-  "itemsCart": [
-    {
-      "id": "b14f",
-      "cartId": "6faf",
-      "productId": "p3",
-      "quantity": 2
-    },
-    {
-      "id": "0b55",
-      "cartId": "6faf",
-      "productId": "p1",
-      "quantity": 1
-    },
-    {
-      "id": "f750",
-      "cartId": "6faf",
-      "productId": "p2",
-      "quantity": 1
-    }
   ]
 }
