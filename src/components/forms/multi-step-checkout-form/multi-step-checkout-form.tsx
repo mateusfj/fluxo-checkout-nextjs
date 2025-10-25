@@ -71,7 +71,7 @@ const MultiStepCheckoutForm = () => {
             >
               Voltar
             </Button>
-            <Button onClick={nextStep} type="submit" disabled={isCreatingOrder}>
+            <Button type="submit" disabled={isCreatingOrder}>
               {getButtonContent()}
             </Button>
           </CardFooter>
