@@ -1,17 +1,7 @@
 "use client";
 
 import { ActionHeader } from "@/components/@shared/action-header/action-header";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  CheckCircle,
-  Clock,
-  Eye,
-  Home,
-  RotateCcw,
-  XCircle,
-} from "lucide-react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 export default function ResultadoCheckoutPage() {
@@ -20,188 +10,96 @@ export default function ResultadoCheckoutPage() {
   const orderId = searchParams.get("orderId");
   const message = searchParams.get("message");
 
-  const getStatusInfo = () => {
-    switch (status) {
-      case "pago":
-        return {
-          title: "Pagamento Aprovado!",
-          description: "Seu pedido foi confirmado com sucesso",
-          icon: CheckCircle,
-          color: "text-green-700",
-          bgColor: "bg-green-50",
-          borderColor: "border-green-200",
-          iconColor: "text-green-700",
-        };
-      case "falhado":
-        return {
-          title: "Pagamento Falhou",
-          description: "Houve um problema ao processar seu pagamento",
-          icon: XCircle,
-          color: "text-red-700",
-          bgColor: "bg-red-50",
-          borderColor: "border-red-200",
-          iconColor: "text-red-700",
-        };
-      case "expirado":
-        return {
-          title: "Pedido Expirou",
-          description: "O tempo para pagamento acabou",
-          icon: Clock,
-          color: "text-orange-700",
-          bgColor: "bg-orange-50",
-          borderColor: "border-orange-200",
-          iconColor: "text-orange-700",
-        };
-      case "pendente":
-        return {
-          title: "Aguardando Pagamento",
-          description: "Seu pedido ainda está aguardando o pagamento",
-          icon: Clock,
-          color: "text-blue-700",
-          bgColor: "bg-blue-50",
-          borderColor: "border-blue-200",
-          iconColor: "text-blue-700",
-        };
-      default:
-        return {
-          title: "Erro Desconhecido",
-          description: "Ocorreu um erro inesperado",
-          icon: XCircle,
-          color: "text-red-700",
-          bgColor: "bg-red-50",
-          borderColor: "border-red-200",
-          iconColor: "text-red-700",
-        };
-    }
-  };
-
   const renderResult = () => {
-    const statusInfo = getStatusInfo();
-    const IconComponent = statusInfo.icon;
-
     return (
-      <Card
-        className={`${statusInfo.bgColor} ${statusInfo.borderColor} border-2`}
-      >
-        <CardContent className="p-6">
-          <div className="flex items-start gap-4">
-            <div
-              className={`p-3 rounded-full ${statusInfo.bgColor} ${statusInfo.borderColor} border`}
-            >
-              <IconComponent className={`h-6 w-6 ${statusInfo.iconColor}`} />
-            </div>
-            <div className="flex-1">
-              <h3 className={`text-xl font-bold ${statusInfo.color} mb-2`}>
-                {statusInfo.title}
-              </h3>
-              <p className={`${statusInfo.color} mb-4`}>
-                {status === "pago" && (
-                  <>
-                    Seu pedido{" "}
-                    <strong className="font-semibold">#{orderId}</strong> foi
-                    confirmado com sucesso. Em breve você receberá atualizações
-                    sobre a entrega.
-                  </>
-                )}
-                {status === "falhado" && (
-                  <>
-                    Houve um problema ao processar seu pagamento.
-                    {message && (
-                      <span className="block mt-2 text-sm">
-                        <strong>Motivo:</strong> {message}
-                      </span>
-                    )}
-                  </>
-                )}
-                {status === "expirado" && (
-                  <>
-                    O tempo para pagamento do pedido{" "}
-                    <strong className="font-semibold">#{orderId}</strong>{" "}
-                    acabou.
-                  </>
-                )}
-                {status === "pendente" && (
-                  <>
-                    Seu pedido{" "}
-                    <strong className="font-semibold">#{orderId}</strong> ainda
-                    está aguardando o pagamento (Boleto ou Pix).
-                  </>
-                )}
-                {!status && (
-                  <>Ocorreu um erro inesperado no status do seu pedido.</>
-                )}
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                {status === "pago" && (
-                  <Button asChild size="lg" className="flex items-center gap-2">
-                    <Link href="/">
-                      <Home className="h-4 w-4" />
-                      Voltar para o início
-                    </Link>
-                  </Button>
-                )}
-
-                {status === "falhado" && (
-                  <Button asChild size="lg" className="flex items-center gap-2">
-                    <Link href="/checkout">
-                      <RotateCcw className="h-4 w-4" />
-                      Tentar Novamente
-                    </Link>
-                  </Button>
-                )}
-
-                {status === "expirado" && (
-                  <Button asChild size="lg" className="flex items-center gap-2">
-                    <Link href="/checkout">
-                      <RotateCcw className="h-4 w-4" />
-                      Gerar um novo pedido
-                    </Link>
-                  </Button>
-                )}
-
-                {status === "pendente" && (
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="flex items-center gap-2"
-                  >
-                    <Link href={`/checkout/pagar/pix?orderId=${orderId}`}>
-                      <Eye className="h-4 w-4" />
-                      Ver Pagamento
-                    </Link>
-                  </Button>
-                )}
-
-                {!status && (
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="flex items-center gap-2"
-                  >
-                    <Link href="/">
-                      <Home className="h-4 w-4" />
-                      Voltar para o início
-                    </Link>
-                  </Button>
-                )}
-
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="flex items-center gap-2"
-                >
-                  <Link href="/">
-                    <Home className="h-4 w-4" />
-                    Ir para a loja
-                  </Link>
-                </Button>
-              </div>
-            </div>
+      <Card className=" border-none shadow-none">
+        <CardContent className="space-y-6">
+          <div className="flex flex-col items-center justify-center py-8 text-center">
+            <h2 className="text-2xl font-bold mb-2">{""}</h2>
+            <p className="text-muted-foreground max-w-md text-pretty">
+              {"xxxxxxx"}
+            </p>
           </div>
+
+          {status === "processing" && (
+            <div className="rounded-lg bg-accent/50 p-4">
+              <p className="text-sm text-muted-foreground text-center">
+                Aguarde enquanto processamos seu pagamento. Não feche esta
+                página.
+              </p>
+            </div>
+          )}
+
+          {status === "paid" && (
+            <div className="space-y-3">
+              <div className="rounded-lg border bg-muted p-4">
+                <h3 className="font-semibold mb-2">Próximos passos:</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>
+                      Você receberá um email de confirmação em instantes
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>
+                      Seu pedido será preparado e enviado em até 2 dias úteis
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-primary">•</span>
+                    <span>
+                      Você pode acompanhar o status do envio pelo email
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              {/* {onGoToProducts && (
+                <Button onClick={onGoToProducts} className="w-full" size="lg">
+                  Continuar comprando
+                </Button>
+              )} */}
+            </div>
+          )}
+
+          {(status === "failed" || status === "expired") && (
+            <div className="space-y-3">
+              <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4">
+                <h3 className="font-semibold mb-2 text-destructive">
+                  O que fazer agora?
+                </h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex gap-2">
+                    <span className="text-destructive">•</span>
+                    <span>
+                      Verifique os dados do pagamento e tente novamente
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-destructive">•</span>
+                    <span>Tente usar outro método de pagamento</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-destructive">•</span>
+                    <span>
+                      Entre em contato com seu banco se o problema persistir
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              {/* {onTryAgain && (
+                <Button
+                  onClick={onTryAgain}
+                  variant="destructive"
+                  className="w-full"
+                  size="lg"
+                >
+                  Tentar novamente
+                </Button>
+              )} */}
+            </div>
+          )}
         </CardContent>
       </Card>
     );
@@ -240,7 +138,7 @@ export default function ResultadoCheckoutPage() {
   return (
     <div>
       <ActionHeader
-        title={getPageTitle()}
+        title={"Status do Pedido"}
         description={getPageDescription()}
         textButton="Voltar ao checkout"
       />
