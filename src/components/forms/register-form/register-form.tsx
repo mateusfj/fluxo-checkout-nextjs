@@ -7,7 +7,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { useRegisterForm } from "./use-register-form";
 
 const RegisterForm = () => {
-  const { form, onSubmit } = useRegisterForm();
+  const { form, onSubmit, isCreatingUser } = useRegisterForm();
 
   return (
     <Form {...form}>
@@ -44,7 +44,7 @@ const RegisterForm = () => {
           className="cursor-pointer w-full"
           onClick={form.handleSubmit(onSubmit)}
           type="button"
-          disabled={form.formState.isSubmitting}
+          disabled={isCreatingUser || form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? (
             <>

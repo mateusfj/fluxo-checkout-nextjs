@@ -4,32 +4,17 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email } = body;
-
-    const responseUser = await fetchUser(email);
-
-    if (!responseUser) {
-      return NextResponse.json(
-        { message: "Usuário não encontrado", statusCode: 401 },
-        { status: 401 }
-      );
-    }
-
-    const data = await responseUser.json();
 
     const cookieStore = await cookies();
 
-    cookieStore.set("session_user", JSON.stringify(data[0]), {
+    cookieStore.set("session_user", JSON.stringify(body), {
       httpOnly: true,
     });
 
-    return NextResponse.json(
-      { user: data[0], message: "Login realizado com sucesso" },
-      { status: 200 }
-    );
+    return NextResponse.json({ user: body }, { status: 200 });
   } catch {
     return NextResponse.json(
-      { message: "Erro interno do servidor", statusCode: 500 },
+      { message: "Erro interno do servidor" },
       { status: 500 }
     );
   }

@@ -1,14 +1,7 @@
+import { EmptyCard } from "@/components/@shared/empty/empty-card";
 import { ErrorFallback } from "@/components/@shared/ErrorFallback/ErrorFallback";
 import { ProductListSkeleton } from "@/components/skeletons/product-skeleton/product-list-skeleton";
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty";
 import { useGetAllProducts } from "@/hooks/products/useGet/useGetAllProducts";
-import { Folder } from "lucide-react";
 import { ProductCard } from "./product-card";
 
 export const ProductList = () => {
@@ -31,19 +24,7 @@ export const ProductList = () => {
   }
 
   if (productsResult && productsResult.data.length === 0) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyMedia variant="icon">
-            <Folder />
-          </EmptyMedia>
-          <EmptyTitle>Nenhum Produto Encontrado</EmptyTitle>
-          <EmptyDescription>
-            Parece que não há produtos disponíveis no momento.
-          </EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    );
+    return <EmptyCard message="Não há produtos disponíveis no momento." />;
   }
 
   return (

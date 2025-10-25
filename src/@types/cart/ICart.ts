@@ -7,3 +7,8 @@ export type IItemCartDetailed = {
   price: number;
   imageUrl: string;
 };
+
+export type IItemCartOrder = {
+  product_id: string;
+  quantity: number;
+};

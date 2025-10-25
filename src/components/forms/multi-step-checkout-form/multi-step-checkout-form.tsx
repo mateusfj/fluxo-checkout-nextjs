@@ -7,14 +7,41 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { Spinner } from "@/components/ui/spinner";
 import { STEPS } from "@/constants/steps-checkout-form";
+import { useCartStore } from "@/stores/use-cart-store";
+import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 import { MapPin } from "lucide-react";
 import { FormProvider } from "react-hook-form";
 import { useMultiStepCheckoutForm } from "./use-multi-step-checkout-form";
 
 const MultiStepCheckoutForm = () => {
-  const { form, step, CurrentComponentStep, nextStep, prevStep } =
-    useMultiStepCheckoutForm();
+  const {
+    form,
+    step,
+    CurrentComponentStep,
+    nextStep,
+    prevStep,
+    isCreatingOrder,
+  } = useMultiStepCheckoutForm();
+
+  const getButtonContent = () => {
+    if (step !== 2) {
+      return "Continuar";
+    }
+
+    if (isCreatingOrder) {
+      return (
+        <>
+          <Spinner className="mr-2" /> Processando...
+        </>
+      );
+    }
+
+    return `Pagar ${formatToBRLMask(getTotalPrice())}`;
+  };
+
+  const { getTotalPrice } = useCartStore();
 
   return (
     <FormProvider {...form}>
@@ -44,8 +71,8 @@ const MultiStepCheckoutForm = () => {
             >
               Voltar
             </Button>
-            <Button onClick={nextStep} type="submit">
-              {step !== 2 ? "Continuar" : "Finalizar"}
+            <Button onClick={nextStep} type="submit" disabled={isCreatingOrder}>
+              {getButtonContent()}
             </Button>
           </CardFooter>
         </Card>

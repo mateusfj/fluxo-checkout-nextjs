@@ -1,5 +1,7 @@
 import { IItemCartDetailed } from "@/@types/cart/ICart";
+import { Card } from "@/components/ui/card";
 import { useCartStore } from "@/stores/use-cart-store";
+import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { memo, useCallback } from "react";
 import { Button } from "../../ui/button";
@@ -27,15 +29,14 @@ export const CartCard = memo(({ item }: CartCardProps) => {
   );
 
   return (
-    <div
-      key={item.productId}
-      className="flex items-center gap-4 p-4 border rounded-lg"
-    >
-      <div className="flex-1">
-        <h3 className="font-medium line-clamp-1">{item.name}</h3>
-        <p className="text-sm text-gray-500">
-          R$ {item.price.toFixed(2)} reais
-        </p>
+    <Card className="flex flex-row items-center gap-4 p-4">
+      <div className="flex-1 flex items-center gap-4">
+        <div>
+          <h3 className="font-medium line-clamp-1">{item.name}</h3>
+          <p className="text-sm text-gray-500">
+            {formatToBRLMask(item.price)} reais
+          </p>
+        </div>
       </div>
       <div className="flex items-center gap-2">
         <Button
@@ -58,7 +59,7 @@ export const CartCard = memo(({ item }: CartCardProps) => {
       </div>
       <div className="text-right">
         <p className="font-medium">
-          R$ {(item.price * item.quantity).toFixed(2)}
+          {formatToBRLMask(item.price * item.quantity)}
         </p>
         <Button
           variant="outline"
@@ -69,7 +70,7 @@ export const CartCard = memo(({ item }: CartCardProps) => {
           <Trash2 className="w-3 h-3" />
         </Button>
       </div>
-    </div>
+    </Card>
   );
 });
 

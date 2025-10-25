@@ -2,6 +2,7 @@
 
 import { IItemCartDetailed } from "@/@types/cart/ICart";
 import { useCartStore } from "@/stores/use-cart-store";
+import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 import { LucideCreditCard, ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
@@ -38,7 +39,7 @@ export const SummaryCard = memo(({ enabledButton }: SummaryCardProps) => {
         <div className="flex flex-col gap-2 border-t pt-4">
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
-            <span>${getTotalPrice().toFixed(2)}</span>
+            <span>{formatToBRLMask(getTotalPrice())}</span>
           </div>
         </div>
         {enabledButton && (

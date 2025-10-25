@@ -8,19 +8,19 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AuthContext } from "@/utils/providers/AuthProvider";
+import { useAuthStore } from "@/stores/use-auth-store";
+
 import { ChevronDown, LogOut } from "lucide-react";
-import { useContext } from "react";
 
 export function NavUser() {
-  const { user } = useContext(AuthContext);
+  const { getCurrentUser, logout } = useAuthStore();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="grid flex-1 text-left text-sm leading-tight cursor-pointer">
           <span className="text-muted-foreground truncate text-xs">
-            {user?.name}
+            {getCurrentUser()?.name}
           </span>
           <div className="flex items-center gap-1">
             <span className="truncate font-medium">Minha Conta</span>
@@ -35,7 +35,7 @@ export function NavUser() {
         sideOffset={4}
       >
         <DropdownMenuLabel className="p-0 font-normal"></DropdownMenuLabel>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={logout}>
           Sair
           <DropdownMenuShortcut>
             <LogOut />

@@ -1,5 +1,6 @@
 import { IItemCartDetailed } from "@/@types/cart/ICart";
 import { Badge } from "@/components/ui/badge";
+import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 
 interface ItemSummaryCardProps {
   item: IItemCartDetailed;
@@ -20,16 +21,13 @@ const ItemSummaryCard = ({ item }: ItemSummaryCardProps) => {
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium truncate">{item.name}</p>
         <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold">${item.price}</span>
-          {item.price && (
-            <span className="text-xs text-muted-foreground line-through">
-              ${item.price}
-            </span>
-          )}
+          <span className="text-sm font-semibold">
+            {formatToBRLMask(item.price)}
+          </span>
         </div>
       </div>
       <div className="text-sm font-semibold">
-        ${(item.price * item.quantity).toFixed(2)}
+        {formatToBRLMask(item.price * item.quantity)}
       </div>
     </div>
   );

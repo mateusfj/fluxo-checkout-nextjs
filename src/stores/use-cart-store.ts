@@ -80,7 +80,10 @@ export const useCartStore = create<CartStore>()(
 
       getCartItems: () => get().getUserCart(),
 
-      getTotalItems: () => get().getUserCart().length,
+      getTotalItems: () =>
+        get()
+          .getUserCart()
+          .reduce((total, item) => total + item.quantity, 0),
 
       getTotalPrice: () =>
         get()

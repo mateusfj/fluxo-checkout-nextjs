@@ -6,7 +6,8 @@ import { RegisterForm, registerSchema } from "../_zod/register-schema";
 
 export const useRegisterForm = () => {
   const { push } = useRouter();
-  const { mutateAsync: createUser } = useCreateUser();
+  const { mutateAsync: createUser, isPending: isCreatingUser } =
+    useCreateUser();
 
   const form = useForm<RegisterForm>({
     defaultValues: {
@@ -27,5 +28,5 @@ export const useRegisterForm = () => {
     push("/login");
   }
 
-  return { form, onSubmit };
+  return { form, onSubmit, isCreatingUser };
 };

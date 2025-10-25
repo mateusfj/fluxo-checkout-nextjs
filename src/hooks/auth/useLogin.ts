@@ -1,6 +1,5 @@
-import { AuthContext } from "@/utils/providers/AuthProvider";
+import { useAuthStore } from "@/stores/use-auth-store";
 import { useMutation } from "@tanstack/react-query";
-import { useContext } from "react";
 import { toast } from "sonner";
 
 interface useLoginProps {
@@ -9,25 +8,18 @@ interface useLoginProps {
 }
 
 export const useLogin = () => {
-  const { setUser } = useContext(AuthContext);
+  const { login } = useAuthStore();
+
   return useMutation({
     mutationFn: async (input: useLoginProps) => {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: input.email }),
+      const user = await login({
+        email: input.email,
+        password: input.password,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Erro ao fazer login");
-      }
-
-      const body = await response.json();
-
-      return body;
+      return user;
     },
 
     onMutate() {
@@ -40,8 +32,7 @@ export const useLogin = () => {
       toast.dismiss(context?.toastId);
     },
 
-    onSuccess(data, __, context) {
-      setUser(data.user);
+    onSuccess(_, __, context) {
       toast.success("Login realizado com sucesso!");
       toast.dismiss(context?.toastId);
     },

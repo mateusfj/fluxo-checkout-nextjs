@@ -79,3 +79,5 @@ export const methodPaymentSchema = z
       }
     }
   });
+
+export type MethodPaymentForm = z.infer<typeof methodPaymentSchema>;

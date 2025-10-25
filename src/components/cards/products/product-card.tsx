@@ -2,8 +2,8 @@
 
 import { useCartStore } from "@/stores/use-cart-store";
 import { generateId } from "@/utils/functions/generateId";
-import { AuthContext } from "@/utils/providers/AuthProvider";
-import { memo, useContext } from "react";
+import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
+import { memo } from "react";
 import { Button } from "../../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../../ui/card";
 
@@ -17,8 +17,6 @@ interface productCardProps {
 
 export const ProductCard = memo((product: productCardProps) => {
   const { addItem } = useCartStore();
-  const { user } = useContext(AuthContext);
-  const userId = user?.id || undefined;
 
   const handleAddToCart = () => {
     const data = {
@@ -45,7 +43,7 @@ export const ProductCard = memo((product: productCardProps) => {
       <CardContent className="space-y-1 text-start p-0">
         <div className="flex justify-between items-center">
           <h3 className="font-semibold text-sm line-clamp-1">{product.name}</h3>
-          <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
+          <p className="text-lg font-bold">{formatToBRLMask(product.price)}</p>
         </div>
         <p className="text-xs text-gray-500 line-clamp-2">
           {product.description}
