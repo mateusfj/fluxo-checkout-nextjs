@@ -1,39 +1,22 @@
+import { ICreateUser } from "@/@types/auth/IUser";
+import { useAuthStore } from "@/stores/use-auth-store";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-interface CreateUserProps {
-  nome: string;
-  email: string;
-  password: string;
-}
-
 export const useCreateUser = () => {
+  const { register } = useAuthStore();
+
   return useMutation({
-    mutationFn: async (newUser: CreateUserProps) => {
+    mutationFn: async (newUser: ICreateUser) => {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      const user = await fetch(
-        `http://localhost:3001/users?email=${newUser.email}`
-      );
-
-      const existUser = await user.json();
-
-      if (existUser.length > 0) {
-        throw new Error("Email já cadastrado");
-      }
-
-      const response = await fetch("http://localhost:3001/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
+      const user = await register({
+        name: newUser.name,
+        email: newUser.email,
+        password: newUser.password,
       });
 
-      if (!response.ok) {
-        const { message } = await response.json();
-        throw new Error(message || "Erro ao cadastrar usuário");
-      }
-
-      return response.json();
+      return user;
     },
 
     onMutate() {

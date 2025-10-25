@@ -1,16 +1,14 @@
-export type ICart = {
+export type IItemCartDetailed = {
   id: string;
-  userId: string;
-};
-
-export type IItemCart = {
-  id: string;
-  cartId: string;
   productId: string;
   quantity: number;
+  description: string;
+  name: string;
+  price: number;
+  imageUrl: string;
 };
 
-export type IItemCartDetailed = {
-  product: IProduct;
-  subtotal: number;
-} & IItemCart;
+export type IItemCartOrder = {
+  product_id: string;
+  quantity: number;
+};

@@ -13,4 +13,11 @@ const numContaMask = (value: string) => {
   return value.replace(/[^\d-]/g, "");
 };
 
-export { moneyMask, numContaMask, unMaskMoney };
+const formatToBRLMask = (value: number): string => {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};
+
+export { formatToBRLMask, moneyMask, numContaMask, unMaskMoney };
