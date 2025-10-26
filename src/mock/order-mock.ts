@@ -1,6 +1,7 @@
 import { CreateOrder, Order, ResponseOrder } from "@/@types/order/IOrder";
 import { EPaymentMethod } from "@/constants/enum/payment-method";
 import { EStatusPayment } from "@/constants/enum/status-payment";
+import { useCartStore } from "@/stores/use-cart-store";
 
 const createOrderMock = async (data: CreateOrder): Promise<ResponseOrder> => {
   await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -18,18 +19,14 @@ const createOrderMock = async (data: CreateOrder): Promise<ResponseOrder> => {
 
   switch (data.methodPayment.paymentMethod) {
     case EPaymentMethod.CREDIT:
-      if (Math.random() < 0.5) {
-        baseOrder.status = EStatusPayment.FAILED;
-
-        mockDB.set(orderId, baseOrder);
-
-        throw { status: EStatusPayment.FAILED, message: "Pagamento falhou" };
-      }
-      baseOrder.status = EStatusPayment.PAID;
-
+      baseOrder.status = EStatusPayment.PROCESSING;
       mockDB.set(orderId, baseOrder);
 
-      return { orderId, status: baseOrder.status };
+      return {
+        orderId,
+        status: baseOrder.status,
+        paymentUrl: `/checkout/result?orderId=${baseOrder.orderId}`,
+      };
 
     case EPaymentMethod.PIX:
       baseOrder.paymentInfo = {
@@ -62,9 +59,35 @@ const createOrderMock = async (data: CreateOrder): Promise<ResponseOrder> => {
 
 export const mockDB = new Map<string, Order>();
 
+export async function getOrderProcessPayment(
+  orderId: string
+): Promise<Order | undefined> {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  const order = mockDB.get(orderId);
+  if (!order) return undefined;
+
+  if (order.status === EStatusPayment.EXPIRED) {
+    return order;
+  }
+
+  if (order.status === EStatusPayment.PROCESSING) {
+    const success =
+      Math.random() < 0.9 ? EStatusPayment.PAID : EStatusPayment.FAILED;
+    order.status = success;
+    mockDB.set(orderId, order);
+  }
+
+  return order;
+}
+
 export async function getOrder(orderId: string): Promise<Order | undefined> {
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-  return mockDB.get(orderId);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const order = mockDB.get(orderId);
+  if (!order) return undefined;
+
+  return order;
 }
 
 export function updateOrderStatus(

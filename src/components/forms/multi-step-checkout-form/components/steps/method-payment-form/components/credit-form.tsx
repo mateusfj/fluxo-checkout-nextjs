@@ -6,11 +6,8 @@ import { MultiStepForm } from "@/components/forms/_zod/multi-step-checkout-schem
 import { cardMask } from "@/utils/functions/masks/cardMask";
 import { useFormContext } from "react-hook-form";
 
-const CreditCardForm = () => {
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext<MultiStepForm>();
+const CreditForm = () => {
+  const { control } = useFormContext<MultiStepForm>();
 
   return (
     <div className="flex flex-col gap-4 pt-6 border-t">
@@ -73,4 +70,4 @@ const CreditCardForm = () => {
   );
 };
 
-export { CreditCardForm };
+export { CreditForm };

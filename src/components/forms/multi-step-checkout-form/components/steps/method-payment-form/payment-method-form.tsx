@@ -2,28 +2,37 @@ import { MultiStepForm } from "@/components/forms/_zod/multi-step-checkout-schem
 import { EPaymentMethod } from "@/constants/enum/payment-method";
 
 import { useFormContext } from "react-hook-form";
-import { BoletoInfo } from "./components/boleto-info";
-import { CreditCardForm } from "./components/credit-card-form";
+
+import { CreditForm } from "./components/credit-form";
 import { PaymentMethodSelector } from "./components/payment-method-selector";
-import { PixInfo } from "./components/pix-info";
+import { PaymentInfoCard } from "../../../../../cards/checkout/payment-info-card";
+import { QrCode, Receipt } from "lucide-react";
 
 const PaymentMethodForm = () => {
-  const { control, watch } = useFormContext<MultiStepForm>();
+  const { watch } = useFormContext<MultiStepForm>();
 
   return (
     <div>
       <PaymentMethodSelector />
 
       {watch("methodPaymentSchema.paymentMethod") === EPaymentMethod.CREDIT && (
-        <CreditCardForm />
+        <CreditForm />
       )}
 
       {watch("methodPaymentSchema.paymentMethod") === EPaymentMethod.PIX && (
-        <PixInfo />
+        <PaymentInfoCard
+          title="Pagamento via Pix"
+          message="Ao finalizar a compra, um QR Code será gerado. Use o app do seu banco para pagar e a aprovação é instantânea."
+          icon={<QrCode className="h-5 w-5 mt-0.5" />}
+        />
       )}
 
       {watch("methodPaymentSchema.paymentMethod") === EPaymentMethod.BOLETO && (
-        <BoletoInfo />
+        <PaymentInfoCard
+          icon={<Receipt className="h-5 w-5 mt-0.5" />}
+          title="Boleto Bancário"
+          message="O boleto será gerado ao finalizar a compra, com vencimento em 3 dias úteis."
+        />
       )}
     </div>
   );
