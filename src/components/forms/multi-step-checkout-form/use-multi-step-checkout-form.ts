@@ -1,4 +1,4 @@
-import { STEPS } from "@/constants/steps-checkout-form";
+import { STEPS } from "@/constants/checkout/steps-checkout-form";
 
 import { IItemCartDetailed, IItemCartOrder } from "@/@types/cart/ICart";
 import { CreateOrder } from "@/@types/order/IOrder";
@@ -13,6 +13,7 @@ import {
   MultiStepForm,
   multiStepCheckoutSchema,
 } from "../_zod/multi-step-checkout-schema";
+
 export const useMultiStepCheckoutForm = () => {
   const { currentUser: user } = useAuthStore();
   const [step, setStep] = useState<number>(0);

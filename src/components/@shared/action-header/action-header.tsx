@@ -2,18 +2,22 @@
 
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface ActionHeaderProps {
   description: string;
   title: string;
   textButton?: string;
+  href?: string;
 }
 
 const ActionHeader = ({
   description,
   title,
   textButton,
+  href,
 }: ActionHeaderProps) => {
+  const { push } = useRouter();
   return (
     <div className="flex items-center">
       <div className="flex items-start gap-4 flex-col">
@@ -21,7 +25,7 @@ const ActionHeader = ({
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => window.history.back()}
+            onClick={() => push(href ?? "")}
             className="flex items-center gap-1"
           >
             <ChevronLeft className="h-4 w-4" />

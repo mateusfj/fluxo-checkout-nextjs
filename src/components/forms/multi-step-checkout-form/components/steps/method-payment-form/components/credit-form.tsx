@@ -1,7 +1,7 @@
 "use client";
 
-import { CustomSelect } from "@/components/custom-components/custom-select";
-import { CustomTextInput } from "@/components/custom-components/custom-text-input";
+import { CustomSelect } from "@/components/custom-form-components/custom-select";
+import { CustomTextInput } from "@/components/custom-form-components/custom-text-input";
 import { MultiStepForm } from "@/components/forms/_zod/multi-step-checkout-schema";
 import { cardMask } from "@/utils/functions/masks/cardMask";
 import { useFormContext } from "react-hook-form";

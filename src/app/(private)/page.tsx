@@ -1,13 +1,9 @@
 "use client";
 
-import { ProductList } from "@/components/cards/products/product-list";
+import { Product } from "@/features/products/product";
 
 const Home = () => {
-  return (
-    <main>
-      <ProductList />
-    </main>
-  );
+  return <Product />;
 };
 
 export default Home;

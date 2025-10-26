@@ -1,4 +1,4 @@
-import { useCreateUser } from "@/hooks/auth/useCreateUser";
+import { useCreateUser } from "@/hooks/auth/create/use-create-user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";

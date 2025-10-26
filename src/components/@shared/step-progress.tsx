@@ -1,4 +1,4 @@
-import { STEPS } from "@/constants/steps-checkout-form";
+import { STEPS } from "@/constants/checkout/steps-checkout-form";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 

@@ -8,7 +8,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
-import { STEPS } from "@/constants/steps-checkout-form";
+import { STEPS } from "@/constants/checkout/steps-checkout-form";
 import { useCartStore } from "@/stores/use-cart-store";
 import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 import { MapPin } from "lucide-react";
@@ -67,7 +67,7 @@ const MultiStepCheckoutForm = () => {
               onClick={prevStep}
               variant="secondary"
               type="button"
-              disabled={step === 0}
+              disabled={step === 0 || isCreatingOrder}
             >
               Voltar
             </Button>

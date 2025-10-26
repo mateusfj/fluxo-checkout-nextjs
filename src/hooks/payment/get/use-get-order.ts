@@ -1,5 +1,5 @@
 import { Order } from "@/@types/order/IOrder";
-import { getOrder } from "@/mock/order-mock";
+import { getOrder } from "@/@mock/order-mock-api";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetOrder = (orderId: string) => {

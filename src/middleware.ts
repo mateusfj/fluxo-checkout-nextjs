@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { getSession } from "./utils/functions/getSession";
+import { getSession } from "./utils/functions/actions/get-session";
 
 const PUBLIC_ROUTES = [
   {

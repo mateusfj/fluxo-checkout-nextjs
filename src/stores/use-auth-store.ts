@@ -4,24 +4,13 @@ import {
   IUser,
   IUserWithoutPassword,
 } from "@/@types/auth/IUser";
-import { logout } from "@/utils/functions/logout";
+import { logout } from "@/utils/functions/actions/logout";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useCartStore } from "./use-cart-store";
+import { IAuthStore } from "@/@types/auth/IAuthStore";
 
-interface AuthStoreState {
-  users: Record<string, IUser>;
-  currentUser: IUser | null;
-}
-
-interface AuthStoreActions {
-  register: (user: ICreateUser) => void;
-  login: (login: ILoginUser) => void;
-  logout: () => void;
-  getCurrentUser: () => IUser | null;
-}
-
-export const useAuthStore = create<AuthStoreState & AuthStoreActions>()(
+export const useAuthStore = create<IAuthStore>()(
   persist(
     (set, get) => ({
       users: {},

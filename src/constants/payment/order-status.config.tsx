@@ -45,7 +45,7 @@ export const STATUS_CONFIG: Record<string, StatusInfo> = {
     title: "Pagamento expirado",
     description: "O tempo para pagamento expirou. Por favor, tente novamente.",
     color: "text-destructive",
-    Icon: () => <Clock className="h-16 w-16 text-destructive" />, // Ícone mais sugestivo de falha
+    Icon: () => <Clock className="h-16 w-16 text-destructive" />,
   },
   [EStatusPayment.PENDING]: {
     title: "Aguardando pagamento",
