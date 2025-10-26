@@ -1,6 +1,6 @@
 import { Order } from "@/@types/order/IOrder";
 import { EStatusPayment } from "@/constants/enum/status-payment";
-import { getOrderProcessPayment } from "@/mock/order-mock";
+import { getOrderProcessPayment } from "@/@mock/order-mock-api";
 import { useCartStore } from "@/stores/use-cart-store";
 import { useQuery } from "@tanstack/react-query";
 

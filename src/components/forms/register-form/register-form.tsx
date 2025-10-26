@@ -1,10 +1,11 @@
 "use client";
-import { CustomPasswordInput } from "@/components/custom-components/custom-password-input";
-import { CustomTextInput } from "@/components/custom-components/custom-text-input";
+
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { useRegisterForm } from "./use-register-form";
+import { CustomTextInput } from "@/components/custom-form-components/custom-text-input";
+import { CustomPasswordInput } from "@/components/custom-form-components/custom-password-input";
 
 const RegisterForm = () => {
   const { form, onSubmit, isCreatingUser } = useRegisterForm();

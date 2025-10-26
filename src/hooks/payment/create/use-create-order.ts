@@ -1,8 +1,6 @@
 import { CreateOrder, ResponseOrder } from "@/@types/order/IOrder";
 import { IError } from "@/@types/services/IError";
-import { EStatusPayment } from "@/constants/enum/status-payment";
-import { createOrderMock } from "@/mock/order-mock";
-
+import { createOrderMock } from "@/@mock/order-mock-api";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";

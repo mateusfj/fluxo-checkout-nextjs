@@ -5,8 +5,9 @@ import { useFormContext } from "react-hook-form";
 
 import { CreditForm } from "./components/credit-form";
 import { PaymentMethodSelector } from "./components/payment-method-selector";
-import { PaymentInfoCard } from "../../../../../cards/checkout/payment-info-card";
+
 import { QrCode, Receipt } from "lucide-react";
+import { PaymentInfoCard } from "@/features/checkout/cards/payment-info-card";
 
 const PaymentMethodForm = () => {
   const { watch } = useFormContext<MultiStepForm>();

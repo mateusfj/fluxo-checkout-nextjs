@@ -1,9 +1,10 @@
 "use client";
 
-import { CustomSelect } from "@/components/custom-components/custom-select";
-import { CustomTextInput } from "@/components/custom-components/custom-text-input";
+import { CustomSelect } from "@/components/custom-form-components/custom-select";
+import { CustomTextInput } from "@/components/custom-form-components/custom-text-input";
 import { MultiStepForm } from "@/components/forms/_zod/multi-step-checkout-schema";
 import { STATES } from "@/constants/@shared/states";
+import { cepMask } from "@/utils/functions/masks/cepMask";
 import { phoneMask } from "@/utils/functions/masks/phoneMask";
 import { useFormContext } from "react-hook-form";
 
@@ -60,6 +61,7 @@ const shippingForm = () => {
           control={control}
           name="shippingSchema.zipCode"
           label="CEP *"
+          mask={cepMask}
           placeholder="00000-000"
         />
       </div>
