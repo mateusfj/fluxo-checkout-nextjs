@@ -5,6 +5,7 @@ import { useCartStore } from "@/stores/use-cart-store";
 import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { memo, useCallback } from "react";
+import { toast } from "sonner";
 
 interface CartCardProps {
   item: IItemCartDetailed;

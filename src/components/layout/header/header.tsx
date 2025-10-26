@@ -6,7 +6,7 @@ import { NavUser } from "./components/nav-user";
 
 const Header = () => {
   return (
-    <header className="w-full border-b">
+    <header className="w-full border-b bg-primary">
       <div className="container mx-auto p-4 flex items-center justify-between py-6">
         <Logo />
         <div className="flex h-5 items-center space-x-4 text-sm">

@@ -19,12 +19,14 @@ export function NavUser() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="grid flex-1 text-left text-sm leading-tight cursor-pointer">
-          <span className="text-muted-foreground truncate text-xs">
+          <span className="text-primary-foreground truncate text-xs">
             {getCurrentUser()?.name}
           </span>
           <div className="flex items-center gap-1">
-            <span className="truncate font-medium">Minha Conta</span>
-            <ChevronDown className="h-4 w-4" />
+            <span className="truncate font-medium text-primary-foreground">
+              Minha Conta
+            </span>
+            <ChevronDown className="h-4 w-4 text-primary-foreground" />
           </div>
         </div>
       </DropdownMenuTrigger>

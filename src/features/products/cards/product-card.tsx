@@ -10,6 +10,7 @@ import {
 import { useCartStore } from "@/stores/use-cart-store";
 import { formatToBRLMask } from "@/utils/functions/masks/moneyMask";
 import { memo } from "react";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   id: string;

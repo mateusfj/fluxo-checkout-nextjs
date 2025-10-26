@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 const PixMethod = ({ order }: { order: Order }) => {
   const [copied, setCopied] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(1000);
+  const [timeLeft, setTimeLeft] = useState(30);
   const { push } = useRouter();
 
   useEffect(() => {

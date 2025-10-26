@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BoletoMethod = ({ order }: { order: Order }) => {
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(30);
   const [copied, setCopied] = useState(false);
   const { push } = useRouter();
 

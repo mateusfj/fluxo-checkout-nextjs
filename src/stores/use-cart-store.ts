@@ -1,4 +1,5 @@
 import { CartStore } from "@/@types/cart/ICartStore";
+import { toast } from "sonner";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -36,6 +37,8 @@ export const useCartStore = create<CartStore>()(
             updatedCart = [...userCart, { ...item, quantity: 1 }];
           }
 
+          toast.success("Produto adicionado ao carrinho!");
+
           return {
             cartsByUser: {
               ...cartsByUser,
@@ -51,6 +54,8 @@ export const useCartStore = create<CartStore>()(
 
           const userCart = cartsByUser[userId] || [];
           const updatedCart = userCart.filter((item) => item.id !== id);
+
+          toast.success("Produto removido do carrinho!");
 
           return {
             cartsByUser: {
@@ -68,6 +73,12 @@ export const useCartStore = create<CartStore>()(
           const userCart = cartsByUser[userId] || [];
           const updatedCart = userCart.map((item) =>
             item.id === id ? { ...item, quantity } : item
+          );
+
+          toast.success(
+            quantity > 0
+              ? "Quantidade atualizada!"
+              : "Produto removido do carrinho!"
           );
 
           return {

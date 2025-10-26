@@ -28,11 +28,11 @@ const CartButton = () => {
           className="relative"
           onClick={handleNavigateToCart}
         >
-          <ShoppingCart className="h-5 w-5" />
-          <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center rounded-full text-[10px] text-white">
+          <ShoppingCart className="h-5 w-5 text-primary-foreground" />
+          <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center bg-primary-foreground justify-center rounded-full text-[10px] text-primary">
             {getTotalItems()}
           </Badge>
-          <p className="hidden md:block"> Carrinho</p>
+          <p className="hidden md:block text-primary-foreground"> Carrinho</p>
         </Button>
       </TooltipTrigger>
       <TooltipContent>
