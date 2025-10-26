@@ -33,7 +33,7 @@ export function CustomTextInput({
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && <FormLabel htmlFor={field.name}>{label}</FormLabel>}
           <FormControl>
             <Input
               {...field}

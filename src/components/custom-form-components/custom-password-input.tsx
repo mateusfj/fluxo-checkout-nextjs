@@ -33,7 +33,7 @@ export function CustomPasswordInput({
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && <FormLabel htmlFor={field.name}>{label}</FormLabel>}
           <div className="relative">
             <FormControl>
               <Input
